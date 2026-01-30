@@ -1,5 +1,6 @@
 ---
 title: "About the Builder"
+coverImage: "src/content/cycling/cover.jpg"
 ---
 
 My name is Caleb - I am a born and raised Marlyander and for the past ten years, I have jorneyed in discovering my passion for bikes.
