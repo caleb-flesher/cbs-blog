@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { NavBar } from './nav-bar/nav-bar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterLink, RouterOutlet],
+  imports: [RouterLink, RouterOutlet, NavBar],
   template: `
-    <nav>
-      <a routerLink="/">Home</a>
-    </nav>
+    <blog-nav-bar></blog-nav-bar>
 
     <router-outlet />
   `,
