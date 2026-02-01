@@ -1,6 +1,6 @@
-# cbs-blog
+# Caleb's Bike Shop Blog
 
-This project was generated with [Analog](https://analogjs.org), the fullstack meta-framework for Angular.
+An Angular webapp created for my bike shop.
 
 ## Setup
 
