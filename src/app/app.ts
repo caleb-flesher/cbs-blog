@@ -8,19 +8,22 @@ import { NavBar } from './nav-bar/nav-bar';
   template: `
     <blog-nav-bar></blog-nav-bar>
 
-    <router-outlet />
+    <div class="page">
+      <router-outlet />
+    </div>
   `,
   styles: `
     :host {
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+
+    .page {
       max-width: 1280px;
       margin: 0 auto;
       padding: 2rem;
       text-align: center;
-    }
-
-    nav {
-      text-align: left;
-      padding: 0 0 2rem 0;
     }
   `,
 })
