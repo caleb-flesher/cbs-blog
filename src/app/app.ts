@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { NavBar } from './nav-bar/nav-bar';
+import { SocialFooter } from './social-footer';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterLink, RouterOutlet, NavBar],
+  imports: [RouterOutlet, NavBar, SocialFooter],
   template: `
     <blog-nav-bar></blog-nav-bar>
 
     <div class="page">
       <router-outlet />
     </div>
+
+    <social-footer></social-footer>
   `,
   styles: `
     :host {

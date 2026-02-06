@@ -3,6 +3,8 @@ body {
 }
 
 .navbar {
+  position: sticky;
+  top: 0;
   width: 100%;
   background-color: #052800;
 }
@@ -20,6 +22,7 @@ body {
   padding: 0 80px;
   padding-left: 12px;
   height: 110px;
+  position: relative;
 
   display: flex;
   align-items: center;
