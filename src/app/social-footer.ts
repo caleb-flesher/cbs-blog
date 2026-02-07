@@ -37,8 +37,8 @@ import { Component } from '@angular/core';
   styles: `
     .footer {
       width: 100%;
-      background-color: #052800;
-      color: white;
+      background-color: #1c1703;
+      color: #fffdd0;
       padding: 16px 0;
     }
 
@@ -64,7 +64,7 @@ import { Component } from '@angular/core';
     }
 
     .footer-socials a {
-      color: white;
+      color: #fffdd0;
       font-size: 1.25rem;
       transition:
         opacity 0.3s ease,
