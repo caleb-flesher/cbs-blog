@@ -8,12 +8,14 @@ import PostAttributes from '../../post-attributes';
   selector: 'app-blog-post',
   imports: [AsyncPipe, MarkdownComponent],
   template: `
-    @if (post$ | async; as post) {
+  @if (post$ | async; as post) {
     <article>
-      <img class="post__image" [src]="post.attributes.coverImage" />
+      @if (post.attributes.coverImage) {
+        <img class="post__image" [src]="post.attributes.coverImage" />
+      }
       <analog-markdown [content]="post.content" />
     </article>
-    }
+  }
   `,
   styles: `
     .post__image {
@@ -22,5 +24,8 @@ import PostAttributes from '../../post-attributes';
   `,
 })
 export default class BlogPost {
-  readonly post$ = injectContent<PostAttributes>('slug');
+  readonly post$ = injectContent<PostAttributes>({
+    param: 'slug',
+    subdirectory: 'blog',
+  });
 }

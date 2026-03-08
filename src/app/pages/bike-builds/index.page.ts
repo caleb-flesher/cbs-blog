@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { injectContentFiles } from '@analogjs/content';
 
-import PostAttributes from '../post-attributes';
+import PostAttributes from '../../post-attributes';
 
 @Component({
-  selector: 'blog-blog',
+  selector: 'app-blog',
   imports: [RouterLink],
   template: `
-    <h1>Blog</h1>
+    <h1>Blog Archive</h1>
 
     @for (post of posts; track post.attributes.slug) {
     <a [routerLink]="['/blog/', post.attributes.slug]">
@@ -18,14 +18,18 @@ import PostAttributes from '../post-attributes';
     }
   `,
   styles: `
-    a { display: block; margin-bottom: 1.5rem; text-align: left; }
-    .post__title, .post__desc { margin: 0; }
+    a {
+      text-align: left;
+      display: block;
+      margin-bottom: 2rem;
+    }
+
+    .post__title,
+    .post__desc {
+      margin: 0;
+    }
   `,
 })
-export class Blog {
-  readonly posts = injectContentFiles<PostAttributes>()
-  .filter(post => post.filename.includes('/blog/'))
-  .filter(post =>
-    !post.filename.split('/').pop()!.startsWith('DRAFT')
-  );
+export default class Blog {
+  readonly posts = injectContentFiles<PostAttributes>();
 }
