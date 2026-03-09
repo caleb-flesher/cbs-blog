@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { getCommonTestProviders } from '../../test-utils';
 import { HomePage } from './home-page';
 
 describe('HomePage', () => {
@@ -8,16 +8,26 @@ describe('HomePage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomePage]
-    })
-    .compileComponents();
+      imports: [HomePage],
+      providers: getCommonTestProviders(),
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HomePage);
     component = fixture.componentInstance;
+    fixture.detectChanges();
     await fixture.whenStable();
+  });
+
+  afterEach(() => {
+    fixture.destroy();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled).toBeTruthy();
   });
 });
