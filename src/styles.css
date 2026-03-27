@@ -39,8 +39,15 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  padding-top: 100px !important; /* matches your navbar height */
+  /* remove display: flex and flex-direction: column */
+}
+
+app-root {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  display: block;
 }
 
 h1 {
@@ -94,4 +101,10 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+}
+
+@media (prefers-color-scheme: light) {
+  .carousel__dot.active {
+    background: #fffdd0 !important;
+  }
 }

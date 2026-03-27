@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { BackButtonComponent } from "../back-button/back-button";
 
 @Component({
   selector: 'blog-about',
-  imports: [],
+  imports: [BackButtonComponent],
   templateUrl: './about.html',
-  styleUrl: './about.css',
+  styleUrls: ['./about.css'],
 })
-export class About {
-
-}
+export class About {}

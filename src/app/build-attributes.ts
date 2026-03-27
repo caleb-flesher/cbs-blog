@@ -4,4 +4,5 @@ export default interface BuildAttributes {
   date: string;
   description: string;
   coverImage: string;
+  images?: string[];
 }

@@ -4,6 +4,14 @@ slug: the-barhopper
 date: 20XX-XX-XX
 description: The very first build of Caleb's Bike Shop.
 coverImage: /images/bikes/the-barhopper/BH-fire-pit.jpg
+images:
+- /images/bikes/the-barhopper/BH-fire-pit.jpg
+- /images/bikes/the-barhopper/BH-prebuild.jpg
+- /images/bikes/the-barhopper/BH-build-stripped.jpg
+- /images/bikes/the-barhopper/BH-color-matching.jpg
+- /images/bikes/the-barhopper/BH-bottle-opener.jpg
+- /images/bikes/the-barhopper/BH-nearing-completion.jpg
+- /images/bikes/the-barhopper/BH-pre-first-ride.jpg
 ---
 
 # Bike Build No. 1 - The Barhopper

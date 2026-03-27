@@ -1,11 +1,13 @@
 <h1>Home</h1>
 @if (latestPost) {
-  <a [routerLink]="['/blog', latestPost.attributes.slug]">
+  <a class="btn" [routerLink]="['/blog', latestPost.attributes.slug]">
     Go to latest blog post: {{ latestPost.attributes.title }}
   </a>
 }
 @if (latestBikeBuild) {
-  <a [routerLink]="['/bike-builds', latestBikeBuild.attributes.slug]">
+  <a class="btn" [routerLink]="['/bike-builds', latestBikeBuild.attributes.slug]">
     Go to latest bike build: {{ latestBikeBuild.attributes.title }}
   </a>
 }
+
+<!-- Check out my socials! arrow would be cool here -->

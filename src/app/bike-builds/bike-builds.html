@@ -1,46 +1,19 @@
-<h1>Bike Build No. 1 - The Barhopper</h1>
+<app-back-button />
 
-<img
-  alt="The Barhopper Hero Shot"
-  src="./images/bikes/the-barhopper/BH-fire-pit.jpg"
-/>
-
-<h2>The very first build of Caleb's Bike Shop - introducing The Barhopper!</h2>
-
-<p>
-  This 1999 Specialized Rockhopper FS has been refurbished to serve a purpose -
-  to get you to the pub. Many of the parts are original, but many of the parts
-  have also either been replaced or reused. With numerous upgrades and repairs,
-  The Barhopper will get you anywhere you want to go in head-turning style.
-</p>
-
-<p>
-  Maintanence has been done to ensure the bike is in good operating condition.
-  Headset and bottom bracket bearings have replaced, grease applied
-  appropriately, bolts toqued to spec and brakes replaced and serviced. New
-  brake and shifter cables have been cut, installed and tuned as well. Newinner
-  tubes have been fitted on the original wheels with parts-bin Maxxis Minion DHF
-  26 inch tires.
-</p>
-
-<p>
-  Upgrades include swapping to a 1x narrow-wide front chainring, paired with the
-  original deraileur and casette. Additionally, Cannondale Cruise Control bars
-  with new grips, brake levers, and other small updates have been fitted.
-</p>
-
-<p>
-  One of my favorite parts of this bike was fitting the bottle opener on the
-  down tube of the frame. From the start, I knew this would be the fun persona
-  of the bike, and a trend I intend to continue for future builds. I love the
-  fun, unique vibe having it on the bike brings, and that it fit perfectly as
-  well as being functional!
-</p>
-
-<p>
-  While this bike was built for the intention of selling it to someone that will
-  enjoy it as much as I have, I have taken it on a few of my own trips and
-  adventures. The Barhopper was built to partake in the Bikes and Beers 2026
-  tour, but before being sold, I inspect and tune our bikes to ensure the buyer
-  is getting the best quality bike I can provide.
-</p>
+<h1>Bike Builds</h1>
+@for (build of builds; track build.attributes.slug) {
+  <a [routerLink]="['/bike-builds', build.attributes.slug]">
+    <div class="build__card">
+      @if (build.attributes.coverImage) {
+        <picture class="build__cover">
+          <source [srcset]="build.attributes.coverImage + '?width=600&format=webp'" type="image/webp">
+          <img [src]="build.attributes.coverImage + '?width=600'" [alt]="build.attributes.title + ' cover image'">
+        </picture>
+      }
+      <div class="build__info">
+        <h2 class="build__title">{{ build.attributes.title }}</h2>
+        <p class="build__desc">{{ build.attributes.description }}</p>
+      </div>
+    </div>
+  </a>
+}

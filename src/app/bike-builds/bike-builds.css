@@ -1,5 +1,31 @@
-img {
-  float: bottom;
-  border-radius: 30px;
-  width: 50%;
+a {
+  display: block;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  text-decoration: none;
+}
+
+.build__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.build__cover {
+  flex-shrink: 0;
+}
+
+.build__cover img {
+  width: 300px;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+.build__title, .build__desc { 
+  margin: 0;
+  text-align: center;
 }

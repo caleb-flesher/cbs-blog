@@ -1,0 +1,14 @@
+@if (images && images.length > 0) {
+  <div class="carousel">
+    <button class="carousel__btn carousel__btn--prev" (click)="prev()">&#8592;</button>
+    <div class="carousel__track">
+      <img [src]="images[currentIndex]" [alt]="'Image ' + (currentIndex + 1)" class="carousel__img" />
+    </div>
+    <button class="carousel__btn carousel__btn--next" (click)="next()">&#8594;</button>
+    <div class="carousel__dots">
+      @for (img of images; track $index) {
+        <span class="carousel__dot" [class.active]="$index === currentIndex" (click)="currentIndex = $index"></span>
+      }
+    </div>
+  </div>
+}

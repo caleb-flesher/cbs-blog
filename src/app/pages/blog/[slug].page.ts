@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
+import { Location } from '@angular/common';
 import { injectContent, MarkdownComponent } from '@analogjs/content';
 
 import PostAttributes from '../../post-attributes';
+import { BackButtonComponent } from "../../back-button/back-button";
 
 @Component({
   selector: 'app-blog-post',
-  imports: [AsyncPipe, MarkdownComponent],
+  imports: [AsyncPipe, MarkdownComponent, BackButtonComponent],
   template: `
+  <app-back-button />
+
   @if (post$ | async; as post) {
     <article>
       @if (post.attributes.coverImage) {
@@ -28,4 +32,10 @@ export default class BlogPost {
     param: 'slug',
     subdirectory: 'blog',
   });
+
+  constructor(private location: Location) {}
+
+  goBack(): void {
+    this.location.back();
+  }
 }

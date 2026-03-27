@@ -1,25 +1,29 @@
 import { Component } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
+import { Location } from '@angular/common';
 import { injectContent, MarkdownComponent } from '@analogjs/content';
-
+import { BackButtonComponent } from '../../back-button/back-button';
+import { CarouselComponent } from '../../carousel/carousel';
 import BuildAttributes from '../../build-attributes';
 
 @Component({
   selector: 'app-bike-build',
-  imports: [AsyncPipe, MarkdownComponent],
+  imports: [AsyncPipe, MarkdownComponent, BackButtonComponent, CarouselComponent],
   template: `
-  @if (build$ | async; as build) {
-    <article>
-      @if (build.attributes.coverImage) {
-        <img class="build__image" [src]="build.attributes.coverImage" />
-      }
-      <analog-markdown [content]="build.content" />
-    </article>
-  }
+    <app-back-button />
+    @if (build$ | async; as build) {
+      <article>
+        <h1>{{ build.attributes.title }}</h1>
+        <app-carousel [images]="build.attributes.images || []" />
+        <analog-markdown [content]="build.content" />
+      </article>
+    }
   `,
   styles: `
-    .build__image {
-      max-height: 40vh;
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1rem;
     }
   `,
 })
@@ -28,4 +32,5 @@ export default class Blogbuild {
     param: 'slug',
     subdirectory: 'bike-builds',
   });
+  constructor(private location: Location) {}
 }

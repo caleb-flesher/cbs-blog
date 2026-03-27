@@ -1,31 +1,17 @@
 import { Component } from '@angular/core';
+import { BackButtonComponent } from '../back-button/back-button';
 import { RouterLink } from '@angular/router';
 import { injectContentFiles } from '@analogjs/content';
-
 import PostAttributes from '../post-attributes';
 
 @Component({
   selector: 'blog-blog',
-  imports: [RouterLink],
-  template: `
-    <h1>Blog</h1>
-
-    @for (post of posts; track post.attributes.slug) {
-    <a [routerLink]="['/blog/', post.attributes.slug]">
-      <h2 class="post__title">{{ post.attributes.title }}</h2>
-      <p class="post__desc">{{ post.attributes.description }}</p>
-    </a>
-    }
-  `,
-  styles: `
-    a { display: block; margin-bottom: 1.5rem; text-align: left; }
-    .post__title, .post__desc { margin: 0; }
-  `,
+  imports: [RouterLink, BackButtonComponent],
+  templateUrl: './blog.html',
+  styleUrls: ['./blog.css'],
 })
 export class Blog {
   readonly posts = injectContentFiles<PostAttributes>()
-  .filter(post => post.filename.includes('/blog/'))
-  .filter(post =>
-    !post.filename.split('/').pop()!.startsWith('DRAFT')
-  );
+    .filter(post => post.filename.includes('/blog/'))
+    .filter(post => !post.filename.split('/').pop()!.startsWith('DRAFT'));
 }

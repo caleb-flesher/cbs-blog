@@ -1,0 +1,19 @@
+:host {
+    display: block;
+    width: fit-content;
+}
+
+.back-btn-container {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    transform: none;
+    margin: 0;
+    padding: 1rem;
+    width: fit-content;
+    z-index: 999;
+}
+
+.back-btn {
+    display: inline-block;
+}

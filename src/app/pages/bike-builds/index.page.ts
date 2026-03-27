@@ -1,35 +1,61 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { injectContentFiles } from '@analogjs/content';
-
-import PostAttributes from '../../post-attributes';
+import BuildAttributes from '../../build-attributes';
 
 @Component({
-  selector: 'app-blog',
+  selector: 'app-bike-builds',
   imports: [RouterLink],
   template: `
-    <h1>Blog Archive</h1>
-
-    @for (post of posts; track post.attributes.slug) {
-    <a [routerLink]="['/blog/', post.attributes.slug]">
-      <h2 class="post__title">{{ post.attributes.title }}</h2>
-      <p class="post__desc">{{ post.attributes.description }}</p>
-    </a>
+    <h1>Bike Builds</h1>
+    @for (build of builds; track build.attributes.slug) {
+      <a [routerLink]="['/bike-builds/', build.attributes.slug]">
+        <div class="build__card">
+          @if (build.attributes.coverImage) {
+            <img class="build__image" [src]="build.attributes.coverImage" />
+          }
+          <div class="build__info">
+            <h2 class="build__title">{{ build.attributes.title }}</h2>
+            <p class="build__desc">{{ build.attributes.description }}</p>
+          </div>
+        </div>
+      </a>
     }
   `,
   styles: `
     a {
-      text-align: left;
+      text-decoration: none;
       display: block;
       margin-bottom: 2rem;
     }
 
-    .post__title,
-    .post__desc {
+    .build__card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .build__image {
+      width: 150px;
+      height: 100px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .build__info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .build__title,
+    .build__desc {
       margin: 0;
     }
   `,
 })
-export default class Blog {
-  readonly posts = injectContentFiles<PostAttributes>();
+export default class BikeBuilds {
+  readonly builds = injectContentFiles<BuildAttributes>(
+    (contentFile) => contentFile.filename.includes('/bike-builds/')
+  );
 }
