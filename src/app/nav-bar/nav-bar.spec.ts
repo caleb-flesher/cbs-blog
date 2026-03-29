@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
+import { vi } from 'vitest';
 import { NavBar } from './nav-bar';
 
 describe('NavBar', () => {
@@ -74,7 +75,7 @@ describe('NavBar', () => {
   });
 
   it('should call toggleMenu() when hamburger is clicked', () => {
-    spyOn(component, 'toggleMenu');
+    vi.spyOn(component, 'toggleMenu');
     const btn = fixture.debugElement.query(By.css('.hamburger'));
     btn.triggerEventHandler('click', null);
     expect(component.toggleMenu).toHaveBeenCalled();
@@ -114,7 +115,7 @@ describe('NavBar', () => {
   });
 
   it('should call closeMenu() when a nav link is clicked', () => {
-    spyOn(component, 'closeMenu');
+    vi.spyOn(component, 'closeMenu');
     const firstLink = fixture.debugElement.query(By.css('.navbar-links a'));
     firstLink.triggerEventHandler('click', null);
     expect(component.closeMenu).toHaveBeenCalled();
