@@ -1,7 +1,7 @@
 <app-back-button />
 
 <h1>Bike Builds</h1>
-@for (build of builds; track build.attributes.slug) {
+@for (build of builds.slice().reverse(); track build.attributes.slug) {
   <a [routerLink]="['/bike-builds', build.attributes.slug]">
     <div class="build__card">
       @if (build.attributes.coverImage) {

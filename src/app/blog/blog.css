@@ -1,21 +1,17 @@
 a {
   display: block;
   margin-bottom: 1.5rem;
-  text-align: left;
   text-decoration: none;
 }
-
 .post__card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;  /* changed from flex-start */
   gap: 0.5rem;
 }
-
 .post__cover {
   flex-shrink: 0;
 }
-
 .post__cover img {
   width: 250px;
   height: 150px;
@@ -23,8 +19,7 @@ a {
   display: block;
   border-radius: 8px;
 }
-
 .post__title, .post__desc { 
-    margin: 0; 
-    text-align: center;
+  margin: 0; 
+  text-align: center;
 }
