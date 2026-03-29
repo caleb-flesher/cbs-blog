@@ -1,3 +1,4 @@
+// nav-bar.ts
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -7,4 +8,14 @@ import { RouterLink } from '@angular/router';
   templateUrl: './nav-bar.html',
   styleUrl: './nav-bar.css',
 })
-export class NavBar {}
+export class NavBar {
+  menuOpen = false;
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+  }
+}

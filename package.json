@@ -1,6 +1,6 @@
 {
   "name": "cbs-blog",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "engines": {
     "node": ">=20.19.1"
@@ -37,6 +37,7 @@
     "@angular/build": "^21.0.0",
     "@angular/cli": "^21.0.0",
     "@angular/compiler-cli": "^21.0.0",
+    "@types/jasmine": "^6.0.0",
     "@types/node": "^25.3.5",
     "jsdom": "^28.1.0",
     "typescript": "~5.9.0",

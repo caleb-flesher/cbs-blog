@@ -1,3 +1,4 @@
+<!-- navbar.component.html -->
 <nav class="navbar">
   <div class="navbar-inner">
     <div class="navbar-logo">
@@ -7,15 +8,27 @@
       />
     </div>
 
-    <ul class="navbar-links">
-      <li><a routerLink="/home" class="PermanentMarker">Home</a></li>
-      <li><a routerLink="/blog" class="PermanentMarker">Blog</a></li>
-      <li><a routerLink="/bike-builds" class="PermanentMarker">Bike Builds</a></li>
-      <li><a routerLink="/about" class="PermanentMarker">About</a></li>
+    <!-- Hamburger Button (mobile only) -->
+    <button
+      class="hamburger"
+      [class.open]="menuOpen"
+      (click)="toggleMenu()"
+      aria-label="Toggle navigation"
+      [attr.aria-expanded]="menuOpen"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Nav links -->
+    <ul class="navbar-links" [class.open]="menuOpen">
+      <li><a routerLink="/home" class="PermanentMarker" (click)="closeMenu()">Home</a></li>
+      <li><a routerLink="/blog" class="PermanentMarker" (click)="closeMenu()">Blog</a></li>
+      <li><a routerLink="/bike-builds" class="PermanentMarker" (click)="closeMenu()">Bike Builds</a></li>
+      <li><a routerLink="/about" class="PermanentMarker" (click)="closeMenu()">About</a></li>
     </ul>
 
-    <div class="navbar-actions">
-      <!-- Add login/logout buttons or user-related actions here -->
-    </div>
+    <div class="navbar-actions"></div>
   </div>
 </nav>
