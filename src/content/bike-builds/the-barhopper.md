@@ -1,7 +1,7 @@
 ---
 title: The Barhopper
 slug: the-barhopper
-date: 20XX-XX-XX
+date: 2026-03-22
 description: The very first build of Caleb's Bike Shop.
 coverImage: /images/bikes/the-barhopper/BH-fire-pit.jpg
 images:

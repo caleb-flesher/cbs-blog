@@ -4,6 +4,10 @@ slug: draft-post
 date: 20XX-XX-XX
 description: Draft Post Desciption
 coverImage: path/to/image
+images:
+- /images/bikes/build/image-1.jpg
+- /images/bikes/build/image-2.jpg
+- /images/bikes/build/image-3.jpg
 ---
 
 # Draft Post

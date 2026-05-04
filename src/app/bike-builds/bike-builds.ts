@@ -14,4 +14,10 @@ export class BikeBuilds {
   readonly builds = injectContentFiles<BuildAttributes>()
     .filter(build => build.filename.includes('/bike-builds/'))
     .filter(build => !build.filename.split('/').pop()!.startsWith('DRAFT'));
+
+  get sortedBuilds() {
+    return this.builds.slice().sort((a, b) =>
+      new Date(b.attributes.date).getTime() - new Date(a.attributes.date).getTime()
+    );
+  }
 }

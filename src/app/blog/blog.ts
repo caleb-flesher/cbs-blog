@@ -14,4 +14,10 @@ export class Blog {
   readonly posts = injectContentFiles<PostAttributes>()
     .filter(post => post.filename.includes('/blog/'))
     .filter(post => !post.filename.split('/').pop()!.startsWith('DRAFT'));
+
+  get sortedPosts() {
+    return this.posts.slice().sort((a, b) =>
+      new Date(b.attributes.date).getTime() - new Date(a.attributes.date).getTime()
+    );
+  }
 }

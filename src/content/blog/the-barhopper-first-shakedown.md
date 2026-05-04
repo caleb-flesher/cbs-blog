@@ -7,6 +7,8 @@ description: My thoughts after giving The Barhopper it's first official shakedow
 
 # The Barhopper's First Official Shakedown - Thoughts
 
+## March 23rd, 2026
+
 I’ve done the first official shakedown of The Barhopper - and it’s completely blown me away.
 
 I rode it one time around the BWI loop, totaling somewhere between 10.5 and 12 miles, and averaged 13 mph! Strava claims it took me 48 minutes to complete the ride.
