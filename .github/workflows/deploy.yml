@@ -1,14 +1,14 @@
 name: Build and Deploy
-
 on:
   push:
     branches:
       - master
+  schedule:
+    - cron: '0 3 * * *' # Runs nightly at 3am UTC to keep Strava data fresh
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -21,6 +21,13 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Fetch Strava data
+        env:
+          STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
+          STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
+          STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
+        run: node scripts/fetch-strava.mjs
 
       - name: Build Angular app
         run: npx ng build --configuration production
