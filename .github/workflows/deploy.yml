@@ -43,5 +43,3 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/analog/public/
           server-dir: /
-          dangerous-clean-slate: true
-          log-level: verbose

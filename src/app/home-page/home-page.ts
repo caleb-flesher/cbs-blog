@@ -10,19 +10,19 @@ export interface StravaActivity {
   id: number;
   name: string;
   type: 'Run' | 'Ride' | 'Swim' | 'Hike' | 'Walk';
-  distance: number;        // meters
-  moving_time: number;     // seconds
-  elapsed_time: number;    // seconds
+  distance: number; // meters
+  moving_time: number; // seconds
+  elapsed_time: number; // seconds
   total_elevation_gain: number; // meters
   start_date: string;
-  average_speed: number;   // m/s
+  average_speed: number; // m/s
   average_heartrate?: number;
 }
 
 export interface StravaWeeklyStats {
-  distance: number;        // meters
-  moving_time: number;     // seconds
-  elevation_gain: number;  // meters
+  distance: number; // meters
+  moving_time: number; // seconds
+  elevation_gain: number; // meters
   activity_count: number;
 }
 
@@ -49,23 +49,26 @@ interface StravaData {
 })
 export class HomePage implements OnInit {
   // ── Blog & Builds ──────────────────────────────────────────────────────────
+
   private http = inject(HttpClient);
   private platformId = inject(PLATFORM_ID);
 
   private readonly posts = injectContentFiles<PostAttributes>()
-    .filter(post => post.filename.includes('/blog/'))
-    .filter(post => !post.filename.split('/').pop()!.startsWith('DRAFT'))
-    .sort((a, b) =>
-      new Date(b.attributes.date).getTime() -
-      new Date(a.attributes.date).getTime()
+    .filter((post) => post.filename.includes('/blog/'))
+    .filter((post) => !post.filename.split('/').pop()!.startsWith('DRAFT'))
+    .sort(
+      (a, b) =>
+        new Date(b.attributes.date).getTime() -
+        new Date(a.attributes.date).getTime(),
     );
 
   private readonly builds = injectContentFiles<BuildAttributes>()
-    .filter(build => build.filename.includes('/bike-builds/'))
-    .filter(build => !build.filename.split('/').pop()!.startsWith('DRAFT'))
-    .sort((a, b) =>
-      new Date(b.attributes.date).getTime() -
-      new Date(a.attributes.date).getTime()
+    .filter((build) => build.filename.includes('/bike-builds/'))
+    .filter((build) => !build.filename.split('/').pop()!.startsWith('DRAFT'))
+    .sort(
+      (a, b) =>
+        new Date(b.attributes.date).getTime() -
+        new Date(a.attributes.date).getTime(),
     );
 
   readonly latestPost = this.posts[0];
@@ -73,13 +76,19 @@ export class HomePage implements OnInit {
 
   // ── Strava ─────────────────────────────────────────────────────────────────
 
-  
   profile = signal<StravaProfile>({
-    firstname: '', lastname: '', profile_medium: '', city: '', state: '',
+    firstname: '',
+    lastname: '',
+    profile_medium: '',
+    city: '',
+    state: '',
   });
 
   weeklyStats = signal<StravaWeeklyStats>({
-    distance: 0, moving_time: 0, elevation_gain: 0, activity_count: 0,
+    distance: 0,
+    moving_time: 0,
+    elevation_gain: 0,
+    activity_count: 0,
   });
 
   recentActivities = signal<StravaActivity[]>([]);
@@ -89,14 +98,13 @@ export class HomePage implements OnInit {
     if (!isPlatformBrowser(this.platformId)) return; // skip on server
 
     this.http.get<StravaData>('/strava.json').subscribe({
-      next: data => {
-        console.log('Strava data loaded:', data);
+      next: (data) => {
         this.profile.set(data.profile);
         this.weeklyStats.set(data.weeklyStats);
         this.recentActivities.set(data.recentActivities);
         this.stravaLoaded.set(true);
       },
-      error: err => {
+      error: (err) => {
         console.warn('Could not load Strava data:', err);
         this.stravaLoaded.set(true);
       },
@@ -129,7 +137,7 @@ export class HomePage implements OnInit {
 
   formatRelativeDate(dateStr: string): string {
     const diffDays = Math.floor(
-      (Date.now() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24)
+      (Date.now() - new Date(dateStr).getTime()) / (1000 * 60 * 60 * 24),
     );
     if (diffDays === 0) return 'Today';
     if (diffDays === 1) return 'Yesterday';
@@ -138,22 +146,31 @@ export class HomePage implements OnInit {
 
   getActivityIcon(type: string): string {
     const icons: Record<string, string> = {
-      Run: '🏃', Ride: '🚴', Swim: '🏊', Hike: '🥾', Walk: '🚶',
+      Run: '🏃',
+      Ride: '🚴',
+      Swim: '🏊',
+      Hike: '🥾',
+      Walk: '🚶',
     };
     return icons[type] ?? '⚡';
   }
 
   getActivityColor(type: string): string {
     const colors: Record<string, string> = {
-      Run: 'activity-run', Ride: 'activity-ride', Hike: 'activity-hike',
-      Swim: 'activity-swim', Walk: 'activity-walk',
+      Run: 'activity-run',
+      Ride: 'activity-ride',
+      Hike: 'activity-hike',
+      Swim: 'activity-swim',
+      Walk: 'activity-walk',
     };
     return colors[type] ?? 'activity-default';
   }
 
   get initials(): string {
     if (!this.profile().firstname && !this.profile().lastname) return '?';
-    return (this.profile().firstname[0] + this.profile().lastname[0]).toUpperCase();
+    return (
+      this.profile().firstname[0] + this.profile().lastname[0]
+    ).toUpperCase();
   }
 
   get weeklyDistanceKm(): string {

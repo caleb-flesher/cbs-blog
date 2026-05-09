@@ -149,10 +149,8 @@
                 </svg>
                 {{ formatPace(activity) }}
               </span>
-              <span
-                *ngIf="activity.average_heartrate"
-                class="meta-chip meta-hr"
-              >
+              @if (activity.average_heartrate) {
+              <span class="meta-chip meta-hr">
                 <svg
                   class="meta-icon"
                   viewBox="0 0 16 16"
@@ -165,6 +163,7 @@
                 </svg>
                 {{ activity.average_heartrate }} bpm
               </span>
+              }
             </div>
           </div>
         </li>
