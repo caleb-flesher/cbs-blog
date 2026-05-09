@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { injectContentFiles } from '@analogjs/content';
@@ -49,6 +49,8 @@ interface StravaData {
 })
 export class HomePage implements OnInit {
   // ── Blog & Builds ──────────────────────────────────────────────────────────
+  private http = inject(HttpClient);
+  private platformId = inject(PLATFORM_ID);
 
   private readonly posts = injectContentFiles<PostAttributes>()
     .filter(post => post.filename.includes('/blog/'))
@@ -89,9 +91,9 @@ export class HomePage implements OnInit {
   recentActivities: StravaActivity[] = [];
   stravaLoaded = false;
 
-  constructor(private http: HttpClient) {}
-
   ngOnInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return; // skip on server
+
     this.http.get<StravaData>('/strava.json').subscribe({
       next: data => {
         console.log('Strava data loaded:', data);
