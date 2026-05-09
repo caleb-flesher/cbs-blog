@@ -94,6 +94,7 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     this.http.get<StravaData>('/strava.json').subscribe({
       next: data => {
+        console.log('Strava data loaded:', data);
         this.profile = data.profile;
         this.weeklyStats = data.weeklyStats;
         this.recentActivities = data.recentActivities;
