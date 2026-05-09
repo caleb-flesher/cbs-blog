@@ -1,20 +1,24 @@
 <!-- Left column: Strava card -->
 <aside class="left-col">
   <div class="strava-card">
-
     <!-- Header -->
     <div class="card-header">
       <div class="header-left">
         <div class="avatar" aria-hidden="true">
-          @if (profile.profile_medium) {
-            <img [src]="profile.profile_medium" [alt]="profile.firstname + ' ' + profile.lastname" />
-          } @else {
-            {{ initials }}
-          }
+          @if (profile().profile_medium) {
+          <img
+            [src]="profile().profile_medium"
+            [alt]="profile().firstname + ' ' + profile().lastname"
+          />
+          } @else { {{ initials }} }
         </div>
         <div class="athlete-info">
-          <span class="athlete-name">{{ profile.firstname }} {{ profile.lastname }}</span>
-          <span class="athlete-location">{{ profile.city }}, {{ profile.state }}</span>
+          <span class="athlete-name"
+            >{{ profile().firstname }} {{ profile().lastname }}</span
+          >
+          <span class="athlete-location"
+            >{{ profile().city }}, {{ profile().state }}</span
+          >
         </div>
       </div>
       <a
@@ -24,8 +28,15 @@
         class="strava-badge"
         aria-label="View on Strava"
       >
-        <svg class="strava-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/>
+        <svg
+          class="strava-logo"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"
+          />
         </svg>
         Strava
       </a>
@@ -36,7 +47,9 @@
       <h3 class="section-label">This week</h3>
       <div class="stats-grid">
         <div class="stat-item">
-          <span class="stat-value">{{ weeklyDistanceKm }}<span class="stat-unit"> mi</span></span>
+          <span class="stat-value"
+            >{{ weeklyDistanceKm }}<span class="stat-unit"> mi</span></span
+          >
           <span class="stat-label">Distance</span>
         </div>
         <div class="stat-divider" aria-hidden="true"></div>
@@ -51,7 +64,7 @@
         </div>
         <div class="stat-divider" aria-hidden="true"></div>
         <div class="stat-item">
-          <span class="stat-value">{{ weeklyStats.activity_count }}</span>
+          <span class="stat-value">{{ weeklyStats().activity_count }}</span>
           <span class="stat-label">Activities</span>
         </div>
       </div>
@@ -61,50 +74,103 @@
     <div class="activities-section">
       <h3 class="section-label">Recent activities</h3>
       <ul class="activity-list" role="list">
-        <li
-          *ngFor="let activity of recentActivities"
-          class="activity-item"
-        >
-          <div class="activity-icon-wrap" [ngClass]="getActivityColor(activity.type)" aria-hidden="true">
-            <span class="activity-emoji">{{ getActivityIcon(activity.type) }}</span>
+        @for (activity of recentActivities(); track activity.id) {
+        <li class="activity-item">
+          <div
+            class="activity-icon-wrap"
+            [ngClass]="getActivityColor(activity.type)"
+            aria-hidden="true"
+          >
+            <span class="activity-emoji"
+              >{{ getActivityIcon(activity.type) }}</span
+            >
           </div>
           <div class="activity-details">
             <div class="activity-top-row">
               <span class="activity-name">{{ activity.name }}</span>
-              <span class="activity-date">{{ formatRelativeDate(activity.start_date) }}</span>
+              <span class="activity-date"
+                >{{ formatRelativeDate(activity.start_date) }}</span
+              >
             </div>
             <div class="activity-meta">
               <span class="meta-chip">
-                <svg class="meta-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8Zm6-4v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <svg
+                  class="meta-icon"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8Zm6-4v4l2.5 2.5"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
                 </svg>
                 {{ formatDistance(activity.distance) }}
               </span>
               <span class="meta-chip">
-                <svg class="meta-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/>
-                  <path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <svg
+                  class="meta-icon"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    cx="8"
+                    cy="8"
+                    r="6"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  />
+                  <path
+                    d="M8 5v3l2 2"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
                 </svg>
                 {{ formatTime(activity.moving_time) }}
               </span>
               <span class="meta-chip">
-                <svg class="meta-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path d="M2 12 6 6l3 4 2-3 3 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg
+                  class="meta-icon"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 12 6 6l3 4 2-3 3 5"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
                 </svg>
                 {{ formatPace(activity) }}
               </span>
-              <span *ngIf="activity.average_heartrate" class="meta-chip meta-hr">
-                <svg class="meta-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                  <path d="M8 13.5S2 9.5 2 5.5a3.5 3.5 0 0 1 6-2.45A3.5 3.5 0 0 1 14 5.5c0 4-6 8-6 8Z"/>
+              <span
+                *ngIf="activity.average_heartrate"
+                class="meta-chip meta-hr"
+              >
+                <svg
+                  class="meta-icon"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M8 13.5S2 9.5 2 5.5a3.5 3.5 0 0 1 6-2.45A3.5 3.5 0 0 1 14 5.5c0 4-6 8-6 8Z"
+                  />
                 </svg>
                 {{ activity.average_heartrate }} bpm
               </span>
             </div>
           </div>
         </li>
+        }
       </ul>
     </div>
-
   </div>
 </aside>
 
@@ -112,14 +178,16 @@
 <main class="center-col">
   <h1>Home</h1>
   @if (latestPost) {
-    <a class="btn" [routerLink]="['/blog', latestPost.attributes.slug]">
-      Go to latest blog post: {{ latestPost.attributes.title }}
-    </a>
-  }
-  @if (latestBikeBuild) {
-    <a class="btn" [routerLink]="['/bike-builds', latestBikeBuild.attributes.slug]">
-      Go to latest bike build: {{ latestBikeBuild.attributes.title }}
-    </a>
+  <a class="btn" [routerLink]="['/blog', latestPost.attributes.slug]">
+    Go to latest blog post: {{ latestPost.attributes.title }}
+  </a>
+  } @if (latestBikeBuild) {
+  <a
+    class="btn"
+    [routerLink]="['/bike-builds', latestBikeBuild.attributes.slug]"
+  >
+    Go to latest bike build: {{ latestBikeBuild.attributes.title }}
+  </a>
   }
   <!-- Check out my socials! arrow would be cool here -->
 </main>
@@ -131,14 +199,19 @@
     <div class="about-body">
       <span class="about-label">The Builder</span>
       <p class="about-bio">
-        I'm Caleb!
-        A husband, father, biker and builder.
-        I ride bikes, document the builds, and catalog my thoughts along the way.
+        I'm Caleb! A husband, father, biker and builder. I ride bikes, document
+        the builds, and catalog my thoughts along the way.
       </p>
       <span class="about-link">
         Read more
         <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path
+            d="M3 8h10M9 4l4 4-4 4"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </span>
     </div>

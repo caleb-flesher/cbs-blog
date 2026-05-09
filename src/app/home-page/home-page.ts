@@ -1,5 +1,5 @@
-import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, PLATFORM_ID, inject, signal } from '@angular/core';
+import { isPlatformBrowser, NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { injectContentFiles } from '@analogjs/content';
@@ -43,7 +43,7 @@ interface StravaData {
 
 @Component({
   selector: 'home-page',
-  imports: [CommonModule, RouterLink],
+  imports: [RouterLink, NgClass],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })
@@ -73,23 +73,17 @@ export class HomePage implements OnInit {
 
   // ── Strava ─────────────────────────────────────────────────────────────────
 
-  profile: StravaProfile = {
-    firstname: '',
-    lastname: '',
-    profile_medium: '',
-    city: '',
-    state: '',
-  };
+  
+  profile = signal<StravaProfile>({
+    firstname: '', lastname: '', profile_medium: '', city: '', state: '',
+  });
 
-  weeklyStats: StravaWeeklyStats = {
-    distance: 0,
-    moving_time: 0,
-    elevation_gain: 0,
-    activity_count: 0,
-  };
+  weeklyStats = signal<StravaWeeklyStats>({
+    distance: 0, moving_time: 0, elevation_gain: 0, activity_count: 0,
+  });
 
-  recentActivities: StravaActivity[] = [];
-  stravaLoaded = false;
+  recentActivities = signal<StravaActivity[]>([]);
+  stravaLoaded = signal(false);
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) return; // skip on server
@@ -97,14 +91,14 @@ export class HomePage implements OnInit {
     this.http.get<StravaData>('/strava.json').subscribe({
       next: data => {
         console.log('Strava data loaded:', data);
-        this.profile = data.profile;
-        this.weeklyStats = data.weeklyStats;
-        this.recentActivities = data.recentActivities;
-        this.stravaLoaded = true;
+        this.profile.set(data.profile);
+        this.weeklyStats.set(data.weeklyStats);
+        this.recentActivities.set(data.recentActivities);
+        this.stravaLoaded.set(true);
       },
       error: err => {
         console.warn('Could not load Strava data:', err);
-        this.stravaLoaded = true;
+        this.stravaLoaded.set(true);
       },
     });
   }
@@ -158,21 +152,21 @@ export class HomePage implements OnInit {
   }
 
   get initials(): string {
-    if (!this.profile.firstname && !this.profile.lastname) return '?';
-    return (this.profile.firstname[0] + this.profile.lastname[0]).toUpperCase();
+    if (!this.profile().firstname && !this.profile().lastname) return '?';
+    return (this.profile().firstname[0] + this.profile().lastname[0]).toUpperCase();
   }
 
   get weeklyDistanceKm(): string {
-    const miles = this.weeklyStats.distance / 1609.344;
+    const miles = this.weeklyStats().distance / 1609.344;
     return miles.toFixed(1);
   }
 
   get weeklyTimeFormatted(): string {
-    return this.formatTime(this.weeklyStats.moving_time);
+    return this.formatTime(this.weeklyStats().moving_time);
   }
 
   get weeklyElevationFormatted(): string {
-    const feet = Math.round(this.weeklyStats.elevation_gain * 3.28084);
+    const feet = Math.round(this.weeklyStats().elevation_gain * 3.28084);
     return feet + ' ft';
   }
 }
