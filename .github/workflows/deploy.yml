@@ -32,6 +32,13 @@ jobs:
       - name: Build Angular app
         run: npx ng build --configuration production
         
+      - name: Debug dist contents
+        run: |
+          echo "=== dist/analog/public/ ==="
+          ls -la dist/analog/public/
+          echo "=== looking for strava.json ==="
+          find dist -name "strava.json"
+
       - name: Copy strava.json to dist
         run: cp public/strava.json dist/analog/public/strava.json
 
