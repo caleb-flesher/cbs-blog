@@ -22,15 +22,15 @@ to get you to the pub. Many of the parts are original, but many of the parts
 have also either been replaced or reused. With numerous upgrades and repairs,
 The Barhopper will get you anywhere you want to go in head-turning style.
 
-Maintanence has been done to ensure the bike is in good operating condition.
+Maintenance has been done to ensure the bike is in good operating condition.
 Headset and bottom bracket bearings have replaced, grease applied
-appropriately, bolts toqued to spec and brakes replaced and serviced. New
-brake and shifter cables have been cut, installed and tuned as well. Newinner
+appropriately, bolts torqued to spec and brakes replaced and serviced. New
+brake and shifter cables have been cut, installed and tuned as well. New inner
 tubes have been fitted on the original wheels with parts-bin Maxxis Minion DHF
 26 inch tires.
 
-Upgrades include swapping to a 1x narrow-wide front chainring, paired with the
-original deraileur and casette. Additionally, Cannondale Cruise Control bars
+Upgrades include swapping to a 1x narrow-wide front chain ring, paired with the
+original derailleur and cassette. Additionally, Cannondale Cruise Control bars
 with new grips, brake levers, and other small updates have been fitted.
 
 One of my favorite parts of this bike was fitting the bottle opener on the

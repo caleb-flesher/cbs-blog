@@ -2,7 +2,7 @@
 title: Draft Post
 slug: draft-post
 date: 20XX-XX-XX
-description: Draft Post Desciption
+description: Draft Post Description
 coverImage: path/to/image
 ---
 
